@@ -10,7 +10,6 @@ import Dashboard from './pages/Dashboard'
 import CartPage from './pages/CartPage'
 import axios from 'axios'
 import OrderPage from './pages/OrderPage'
-import OrdersPage from './pages/OrdersPage'
 
 export default class App extends Component {
 
@@ -43,7 +42,6 @@ export default class App extends Component {
           <Route path="dashboard" element={ this.isAuthenticated() ? <Dashboard/> : <Navigate to="/login" replace={true} />} />
           <Route path="cart" element={ this.isAuthenticated() ? <CartPage/> : <Navigate to="/login" replace={true} />} />
           <Route path="order" element={ this.isAuthenticated() ? <OrderPage/> : <Navigate to="/login" replace={true} />} />
-          <Route path="orders" element={ this.isAuthenticated() ? <OrdersPage/> : <Navigate to="/login" replace={true} />} />
         </Routes>
       </Fragment>
     )
