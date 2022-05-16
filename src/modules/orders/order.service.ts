@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { CartService } from "../carts/cart.service";
 import { CreateOrderDto } from "./dto/create.order.dto"
 import { UpdateOrderStatusDto } from "./dto/update.orderStatus.dto";
@@ -25,20 +25,23 @@ export class OrderService{
 
     async getOrderByUserId(id : string)
     {
-        let results = []
-        // await this.orderRepository.find({user_id : id}).then(res => res.map( async (val) =>{
-        //     let result = await val.populate({path : "cart_items" , populate : {path : 'product_id'}})
-        //     console.log(result)
-        //     results.push(result)
-        //     return result
-        // }))
-        // return results
-        return await this.orderRepository.find({user_id : id})
+        return await this.orderRepository.getOrdersByUserId(id)
     }
 
     async getOrderById(id : string)
     {
-        return (await this.orderRepository.findOne({_id : id})).populate({path : "cart_items" , populate : {path : 'product_id'}})
+        let res = await this.orderRepository.getOrderById(id)
+        if (res)
+        {
+            return res
+        }
+        else
+        {
+            throw new HttpException({
+                message : "Order Id is not available",
+                status : 400
+            },400)
+        }
     }
 
     async updateStatus(id  , updateOrderStatusDto : UpdateOrderStatusDto){

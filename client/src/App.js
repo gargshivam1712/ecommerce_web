@@ -4,11 +4,8 @@ import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import PrivateRoute from './components/commons/PrivateRoute'
-import GuestRoute from './components/commons/GuestRoute'
 import Dashboard from './pages/Dashboard'
 import CartPage from './pages/CartPage'
-import axios from 'axios'
 import OrderPage from './pages/OrderPage'
 
 export default class App extends Component {

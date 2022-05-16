@@ -11,5 +11,14 @@ export class OrderRepository extends EntityRepository<OrderDocument>{
     {
         super(orderModel)
     }
+
+    async getOrdersByUserId(user_id : string){
+        return this.entityModel.find({user_id : user_id}).populate({path : 'cart_items' , populate : {path : "product_id"}})
+    }
+
+    async getOrderById(id : string)
+    {
+        return this.entityModel.findOne({_id : id}).populate({path : 'cart_items' , populate : {path : "product_id"}})
+    }
     
 }

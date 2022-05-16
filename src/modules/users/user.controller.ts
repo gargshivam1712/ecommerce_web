@@ -21,6 +21,7 @@ export class UserController extends BaseModuleController {
     @Post('/create')
     async createUser(@Body() createUserDto : CreateUserDto) : Promise<User>
     {
+        console.log("crae detail0",createUserDto)
         return this.userService.createUser(createUserDto)
     }
 

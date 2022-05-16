@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import CartCard from '../components/CartCard'
-import { getAllOrder , createOrder } from "../apis/order_api"
+import {  createOrder } from "../apis/order_api"
 import { getCartProduct , removeAllCartProduct } from "../apis/cart_api"
 import { Navigate } from "react-router-dom";
 import OrderCard from '../components/OrderCard';

@@ -57,7 +57,7 @@ class LoginForm extends Component
                 </div>
                 <Message message={error.password}/>
                 <p><input type='submit' className='btn btn-primary' name='submit' /></p>
-                
+                <Link to = '/register'>Sign up New User</Link>
             </form>
             </Fragment>
         )

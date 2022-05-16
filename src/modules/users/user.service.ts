@@ -11,7 +11,9 @@ export class UserService
 
     async createUser(createUserDto : CreateUserDto) : Promise<User>
     {
+        console.log(createUserDto , "details")
         let validate_details = await this.userRepository.findOne({email : createUserDto.email})
+        console.log(validate_details ,"details" )
         if(validate_details)
         {
             throw new HttpException({

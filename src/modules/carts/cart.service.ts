@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { CartRepository } from "./cart.repository";
 import { CreateCartDto } from "./dto/create.cart.dto";
 import { UpdateCartDto } from "./dto/update.cart.dto";
@@ -27,7 +27,15 @@ export class CartService {
 
     async getCart(filter : any) : Promise<Cart>
     {
-        return await (await (await this.cartRepository.findOne(filter)).populate({path : "cart_products" , populate : {path : 'product_id'}}))
+        let result =  await this.cartRepository.getCartDetailsByUserId(filter)
+        if (result)
+        {
+            return result
+        }
+        else
+        {
+            throw new HttpException("Data is not available" ,  400)
+        }
     }
 
     async addCartProductsById(updateCartDto : UpdateCartDto) : Promise<Cart>

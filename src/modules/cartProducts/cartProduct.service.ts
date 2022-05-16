@@ -28,12 +28,7 @@ export class CartProductService {
     }
 
     async deleteCartProduct(id : string){
-        // let updateCartDto : UpdateCartDto = {
-        //     cart_id : res.cart_id,
-        //     cart_product_id : id
-        // }
         return this.cartProductRepository.deleteById(id).then(res => {
-           // this.cartService.removeCartProductById(updateCartDto)
             return res
         })
     }
@@ -45,7 +40,6 @@ export class CartProductService {
 
     async updateCartProductQuantity(id : string, quantity : UpdateCartProductDto)
     {
-        console.log(id , quantity , "asdfg")
         return this.cartProductRepository.findByIdAndUpdate(id , quantity)
     }
 

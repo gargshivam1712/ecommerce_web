@@ -12,7 +12,7 @@ import { OrderModule } from './modules/orders/order.module';
 import { OrderItemModule } from './modules/orderItems/orderItem.module';
 
 @Module({
-  imports: [MongooseModule.forRoot("mongodb://127.0.0.1:27017/squarebot") , UserModule , CategoryModule , ProductModule , CartModule , CartProductModule , OrderModule , OrderItemModule ],
+  imports: [MongooseModule.forRoot("mongodb+srv://Shiva:7gKKTn92l3vN7GWf@cluster0.yeel9.mongodb.net/squareboot?retryWrites=true&w=majority") , UserModule , CategoryModule , ProductModule , CartModule , CartProductModule , OrderModule , OrderItemModule ],
   controllers: [AppController],
   providers: [AppService],
 })

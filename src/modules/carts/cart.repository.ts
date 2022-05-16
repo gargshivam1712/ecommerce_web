@@ -12,4 +12,9 @@ export class CartRepository extends EntityRepository<CartDocument>  {
         super(cartModel)
     }
 
+    async getCartDetailsByUserId(filter : any)
+    {
+        return this.entityModel.findOne(filter).populate({path : "cart_products" , populate : {path : 'product_id'}})
+    }
+
 }
