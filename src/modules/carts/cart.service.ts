@@ -12,6 +12,7 @@ export class CartService {
 
     async createCart(createCartDto : CreateCartDto) : Promise<Cart>
     {
+        console.log("cart detials",createCartDto)
         let validate_details = await this.cartRepository.findOne({user_id : createCartDto.user_id})
         if (validate_details)
         {

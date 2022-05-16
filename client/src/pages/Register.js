@@ -3,6 +3,7 @@ import RegisterForm from "../forms/RegisterForm"
 import {FlushMessageDanger} from '../messages/FlushMessage'
 import {Navigate} from 'react-router-dom'
 import { registerUser } from "../apis/user_api"
+import { createCart } from "../apis/cart_api"
 
 
 class Register extends Component {
@@ -16,6 +17,8 @@ class Register extends Component {
         console.log(data , "register")
         this.setState({try:true})
         registerUser(data).then(res => {
+            console.log("cart detials" , res)
+            createCart({user_id : res._id}).then(res => localStorage.setItem('cart_id' , res._id))
           this.setState({success : true})
           localStorage.setItem('user_id' , res._id)
           this.props.login()
