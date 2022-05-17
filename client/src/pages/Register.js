@@ -1,41 +1,13 @@
 import React, { Component } from 'react'
 import RegisterForm from "../forms/RegisterForm"
-import {FlushMessageDanger} from '../messages/FlushMessage'
-import {Navigate} from 'react-router-dom'
-import { registerUser } from "../apis/user_api"
-import { createCart } from "../apis/cart_api"
-
 
 class Register extends Component {
-
-    state = {
-        success : false,
-        try:false
-    }
         
-    submit = data=>{
-        console.log(data , "register")
-        this.setState({try:true})
-        registerUser(data).then(res => {
-            console.log("cart detials" , res)
-            createCart({user_id : res._id}).then(res => localStorage.setItem('cart_id' , res._id))
-          this.setState({success : true})
-          localStorage.setItem('user_id' , res._id)
-          this.props.login()
-        })
-    }
     render() {
         
-        if(this.state.success){
-            return <Navigate to="/" replace={true} />
-        }
-        return (
-            <div className="container" style={{width:"500px"}}>
-              {
-                  this.state.try && !this.state.success && <FlushMessageDanger message="Invalid Username and Password" /> 
-              }
-              <RegisterForm submit = {this.submit}/>
-            </div>
+        return (<div className="container" style={{width:"500px"}}>
+                    <RegisterForm login = {this.props.login} submit = {this.submit}/>
+                </div>
         )
     }
 }

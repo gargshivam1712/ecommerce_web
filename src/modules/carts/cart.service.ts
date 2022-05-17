@@ -26,9 +26,9 @@ export class CartService {
         }
     }
 
-    async getCart(filter : any) : Promise<Cart>
+    async getCart(id : string) : Promise<Cart>
     {
-        let result =  await this.cartRepository.getCartDetailsByUserId(filter)
+        let result =  await this.cartRepository.getCartDetailsByUserId({user_id : id})
         if (result)
         {
             return result

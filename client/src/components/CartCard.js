@@ -24,21 +24,10 @@ export default class CartCard extends Component {
 
   onChange = (e)=>{
     this.setState({[e.target.name] : e.target.value})
-    console.log({id : this.props.cart_product_details._id , quantity : e.target.value})
     updateQuantity({id : this.props.cart_product_details._id , quantity : e.target.value})
   }
 
-  cancelCartProduct = (e)=>{
-    deleteCartProduct(this.props.cart_product_details._id)
-    this.setState({status : 'deleted'})
-  }
-
   render() {
-
-    if(this.state.status == 'deleted')
-    {
-      return <Navigate to="/cart" replace={true} />
-    }
 
     const cart_product_details = this.props.cart_product_details
     console.log("cart details prodcut" , cart_product_details)
@@ -51,7 +40,9 @@ export default class CartCard extends Component {
                 <div className='col-lg-4'>
                     <h3>{cart_product_details.product_id.product_title}</h3>
                     <p>{cart_product_details.product_id.product_description}</p>
-                    <p>Rs. {cart_product_details.product_id.price.$numberDecimal}</p>
+                    
+                    <div>Price : <p>Rs. {cart_product_details.product_id.price.$numberDecimal}</p></div>
+                    <div> Quantity : 
                     <select id = 'quantity' onChange={this.onChange} name = 'quantity' value={this.state.quantity}>
                       <option>1</option>
                       <option>2</option>
@@ -64,9 +55,11 @@ export default class CartCard extends Component {
                       <option>9</option>
                       <option>10</option>
                     </select>
+                    </div>
+                    
                 </div>
                 <div className='col-lg-4'>
-                  <button className="btn btn-primary" onClick={this.cancelCartProduct} >Cancel</button>
+                  <button className="btn btn-primary" onClick={this.props.cancelCartProduct} >Cancel</button>
                 </div>
             </div>
       </div>

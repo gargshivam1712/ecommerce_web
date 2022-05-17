@@ -23,6 +23,9 @@ class Navbar extends Component {
                         </li>
                     </ul>:
                     <ul className="navbar-nav navbar-right">
+                         <li className="nav-item">
+                            <Link to ='/orders' className='nav-link' >Order Details</Link>
+                        </li>
                         <li className="nav-item">
                             <Link to ='/cart' className='nav-link' >Cart</Link>
                         </li>

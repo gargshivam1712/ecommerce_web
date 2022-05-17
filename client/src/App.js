@@ -4,9 +4,9 @@ import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
 import CartPage from './pages/CartPage'
 import OrderPage from './pages/OrderPage'
+import OrdersPage from './pages/OrdersPage'
 
 export default class App extends Component {
 
@@ -34,11 +34,11 @@ export default class App extends Component {
         <Navbar  authenticated = {this.state.authenticated} logout = {this.logout}/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="login" element={ this.isAuthenticated() ? <Navigate to="/dashboard" replace={true} /> : <Login login = {this.login} />} />
+          <Route path="login" element={ this.isAuthenticated() ? <Navigate to="/" replace={true} /> : <Login login = {this.login} />} />
           <Route path="register" element={<Register login = {this.login} />} />
-          <Route path="dashboard" element={ this.isAuthenticated() ? <Dashboard/> : <Navigate to="/login" replace={true} />} />
           <Route path="cart" element={ this.isAuthenticated() ? <CartPage/> : <Navigate to="/login" replace={true} />} />
           <Route path="order" element={ this.isAuthenticated() ? <OrderPage/> : <Navigate to="/login" replace={true} />} />
+          <Route path="orders" element={ this.isAuthenticated() ? <OrdersPage/> : <Navigate to="/login" replace={true} />} />
         </Routes>
       </Fragment>
     )

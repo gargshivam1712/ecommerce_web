@@ -7,3 +7,5 @@ export const getAllOrderByUserId = async (id) => await axios.get(`/order/getOrde
 export const updateOrderStatus = async (id , status) => await axios.put(`/order/updateStatus/${id}` , {status : status}).then(res => res.data)
 
 export const getOrderById = async (id) => await axios.get(`/order/getOrderById/${id}`).then(res => res.data)
+
+export const cancelOrderById = async (id) => await axios.put(`/order/cancelOrderById/${id}`).then(res => res.data)

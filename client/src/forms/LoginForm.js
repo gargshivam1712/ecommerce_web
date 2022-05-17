@@ -1,6 +1,10 @@
 import React ,{Component,Fragment} from "react";
 import Message from "../messages/Message";
 import { Link } from 'react-router-dom'
+import { loginUser } from "../apis/user_api";
+import {FlushMessageDanger} from '../messages/FlushMessage'
+import {Navigate} from 'react-router-dom'
+import { getCartProduct } from "../apis/cart_api";
 
 class LoginForm extends Component
 {
@@ -9,8 +13,9 @@ class LoginForm extends Component
             email:'',
             password:''
         },
-        loading:true,
-        error:{}
+        loading:false,
+        error:{} , 
+        success : false
     }
 
     onChange=(e)=>{
@@ -26,7 +31,21 @@ class LoginForm extends Component
         this.setState({ error:error });
         if (Object.keys(error).length===0)
         {   
-            this.props.submit(this.state.data)
+            this.setState({
+                loading : true
+            })
+            loginUser(this.state.data)
+            .then(res => {
+                this.setState({loading : false , success : true})
+                localStorage.setItem('user_id' , res._id)
+                this.props.login()
+                getCartProduct({user_id : localStorage.getItem('user_id')}).then(res1 => {
+                    localStorage.setItem('cart_id'  , res1[0]._id)
+                })
+            })
+            .catch(err => {
+                this.setState({error : {global : true} , loading : false})
+            })
                     
         }
     }
@@ -41,9 +60,14 @@ class LoginForm extends Component
     render()
     {
         const {data,error} = this.state;
+        if(this.state.success){
+            return <Navigate to="/" replace={true} />
+        }
         return (
             <Fragment>
-                
+            {
+                this.state.error.global && <FlushMessageDanger message="Invalid Username and Password" /> 
+            }
             <h1>Login Form</h1>
             <form   onSubmit={this.onSubmit} >
                 <div className='from-group'>
@@ -56,7 +80,13 @@ class LoginForm extends Component
                     <input type='password' name='password' id='password' placeholder='Password' value={data.password} onChange={this.onChange} className='form-control'/>
                 </div>
                 <Message message={error.password}/>
-                <p><input type='submit' className='btn btn-primary' name='submit' /></p>
+                {
+                    this.state.loading ? <p><button className="btn btn-primary" type="button" disabled>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true">  </span>
+                      Submit...
+                  </button></p> : <p><input type='submit' className='btn btn-primary' name='submit' /></p>
+                }
+                
                 <Link to = '/register'>Sign up New User</Link>
             </form>
             </Fragment>

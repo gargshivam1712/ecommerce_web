@@ -3,7 +3,7 @@ import { CartService } from "../carts/cart.service";
 import { CreateOrderDto } from "./dto/create.order.dto"
 import { UpdateOrderStatusDto } from "./dto/update.orderStatus.dto";
 import { OrderRepository } from "./order.repository";
-import { Order } from "./schemas/order.schema";
+import { Order , OrderStatus } from "./schemas/order.schema";
 
 @Injectable()
 export class OrderService{
@@ -46,5 +46,10 @@ export class OrderService{
 
     async updateStatus(id  , updateOrderStatusDto : UpdateOrderStatusDto){
         return this.orderRepository.findByIdAndUpdate(id , {status : updateOrderStatusDto})
+    }
+
+    async cancelOrderById(id : string)
+    {
+        return this.orderRepository.findByIdAndUpdate(id , { status : OrderStatus.Cancel })
     }
 }

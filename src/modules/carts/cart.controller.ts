@@ -21,10 +21,10 @@ export class CartController extends BaseModuleController{
         return this.cartService.createCart(createCartDto)
     }
 
-    @Get('/all')
-    async getCartAll(@Body()filter : any) : Promise<Cart>
+    @Get('/get_all_cartproduct/:id')
+    async getCartAll(@Param('id') id : string ) : Promise<Cart>
     {
-        return this.cartService.getCart(filter)
+        return this.cartService.getCart(id)
     }
 
     @Put('/remove_all_cartproduct/:id')

@@ -36,7 +36,7 @@ export default class OrderPage extends Component {
       console.log(this.state,"state")
       if(this.state.order_status == "confirmed")
       {
-        return <Navigate to="/" replace={true} />
+        return <Navigate to="/orders" replace={true} />
       }
     return (
         <div className='container'>

@@ -5,7 +5,7 @@ export const FlushMessageDanger = ({message})=>{
     return <div className="container">
   
     <div className="alert alert-danger alert-dismissible">
-      <button type="button" className="close" data-dismiss="alert">&times;</button>{message}
+    {message}  <button style={{"float" : "right"}} type="button" className="close" data-dismiss="alert">&times;</button>
     </div>
    
   </div>
@@ -14,7 +14,7 @@ export const FlushMessageDanger = ({message})=>{
 export const FlushMessageSuccess = ({message})=>{
     return <div className="container">
     <div className="alert alert-success alert-dismissible">
-      <button type="button" className="close" data-dismiss="alert">&times;</button>{message}
+    {message}   <button style={{"float" : "right"}} type="button" className="close" data-dismiss="alert">&times;</button>
     </div>
    
   </div>

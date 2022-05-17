@@ -39,6 +39,12 @@ export class OrderController extends BaseModuleController{
     {
         return this.orderService.updateStatus(id , updateOrderStatusDto)
     }
+
+    @Put('/cancelOrderById/:id')
+    async cancelOrderById(@Param('id') id : string)
+    {
+        return this.orderService.cancelOrderById(id)
+    }
     
  
 }
