@@ -41,7 +41,9 @@ export class CartService {
 
     async addCartProductsById(updateCartDto : UpdateCartDto) : Promise<Cart>
     {
-        return this.cartRepository.findByIdAndUpdate(updateCartDto.cart_id , {$push : {cart_products : updateCartDto.cart_product_id}})
+        let res = await this.cartRepository.findByIdAndUpdate(updateCartDto.cart_id , {$push : {cart_products : updateCartDto.cart_product_id}})
+        console.log("update cart dto" , updateCartDto , "resu" , res)
+        return res
     }
 
     async removeCartProductById(updateCartDto : UpdateCartDto) : Promise<Cart>

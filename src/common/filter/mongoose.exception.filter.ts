@@ -35,7 +35,7 @@ import {
       // Throw an exceptions for either
       // MongoError, ValidationError, TypeError, CastError and Error
 
-      responseMessage(exception.name, exception.getResponse() || exception.message);
+      responseMessage(exception.name, exception.getResponse && exception.getResponse() || exception.message);
     //   if (exception.message) {
     //     responseMessage("Error", exception.message.error);
     //   } else {

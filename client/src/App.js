@@ -20,7 +20,9 @@ export default class App extends Component {
 
     logout = ()=>{
         localStorage.removeItem('authenticated')
-        this.setState({authenticated : false})
+        localStorage.removeItem('user_id')
+        localStorage.removeItem('cart_id')
+        this.setState({authenticated : false })
     }
 
     login = ()=>{

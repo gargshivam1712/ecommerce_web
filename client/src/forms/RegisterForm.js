@@ -50,7 +50,7 @@ class RegisterForm extends Component
             })
             .catch(err => {
                 console.log(err , "error msg")
-                this.setState({ error : { global : 'invalid'} })
+                this.setState({ error : { global : err.response.data.error || err.response.data} })
                 this.setState({loading : false})
             })
         }
@@ -76,7 +76,7 @@ class RegisterForm extends Component
         return (
             <Fragment>
 
-            {this.state.error.global && <FlushMessageDanger message="Some issue in registration" />}
+            {this.state.error.global && <FlushMessageDanger message= {this.state.error.global} />}
                 
             <h1>Register Form</h1>
             <form   onSubmit={this.onSubmit} >

@@ -39,8 +39,9 @@ class LoginForm extends Component
                 this.setState({loading : false , success : true})
                 localStorage.setItem('user_id' , res._id)
                 this.props.login()
-                getCartProduct({user_id : localStorage.getItem('user_id')}).then(res1 => {
-                    localStorage.setItem('cart_id'  , res1[0]._id)
+                getCartProduct({user_id : res._id}).then(res1 => {
+                    console.log("cart id" ,res1)
+                    localStorage.setItem('cart_id'  , res1._id)
                 })
             })
             .catch(err => {
